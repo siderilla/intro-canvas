@@ -135,34 +135,33 @@
 
 // // setInterval(drawRectangles, 30);
 
-// function draw() {
-// 	const ctx = document.getElementById("my-canvas").getContext("2d");
+function draw() {
+	const ctx = document.getElementById("my-canvas").getContext("2d");
 
-// // ctx.strokeStyle = 'crimson';
-// // ctx.lineWidth = 1;
-// // ctx.strokeRect(350, 400, 10, 50);
-// for (let i = 0; i < 10; i++) {
+// ctx.strokeStyle = 'crimson';
+// ctx.lineWidth = 1;
+// ctx.strokeRect(350, 400, 10, 50);
+for (let i = 0; i < 10; i++) {
 
-// 	//diagonale da sx a dx
-// 	ctx.lineWidth = 1 + i;
-// 	ctx.beginPath();
-// 	ctx.strokeStyle = "blue";
-// 	ctx.moveTo(580 + i * 20, 580);
-// 	ctx.lineTo(20 + i * 20, 20);
-// 	ctx.stroke();
+	//diagonale da sx a dx
+	ctx.lineWidth = 1 + i;
+	ctx.beginPath();
+	ctx.strokeStyle = "blue";
+	ctx.moveTo(580 + i * 20, 580);
+	ctx.lineTo(20 + i * 20, 20);
+	ctx.stroke();
 
-// 	// //diagonale da dx a sx
-// 	ctx.beginPath();
-// 	ctx.strokeStyle = "violet";
-// 	ctx.moveTo(20, 580);
-// 	ctx.lineTo(580 + i * 100, 20);
-// 	// ctx.lineTo(20, 20) // aggiungendo una terza istruzione
-// 	// ctx.closePath(); // insieme a closepath formo un triangolo BOOOH WOW
-// 	ctx.stroke();
-// }
+	// //diagonale da dx a sx
+	ctx.beginPath();
+	ctx.strokeStyle = "violet";
+	ctx.moveTo(20, 580);
+	ctx.lineTo(580 + i * 100, 20);
+	// ctx.lineTo(20, 20) // aggiungendo una terza istruzione
+	// ctx.closePath(); // insieme a closepath formo un triangolo BOOOH WOW
+	ctx.stroke();
+}
 // // for (let i = 0; i < 10; i++) {
 	
-// // //diagonale da sx a dx
 // // ctx.lineWidth = 1 + i;
 // // ctx.beginPath(); // fa effetto anti-alias non so perché all'arco
 // // ctx.arc(300, 300, 50, 0, Math.PI * 2, true);
@@ -179,19 +178,11 @@
 
 // // ctx.stroke();
 
-// // // //diagonale da dx a sx
-// // // ctx.lineWidth = 1 + i;
-// // // ctx.beginPath();
-// // // ctx.strokeStyle = "violet";
-// // // ctx.moveTo(20 + i * 0, 580);
-// // // ctx.lineTo(580 + i * 0, 20);
-// // // ctx.stroke();
-
 // // }
 
-// }
+}
 
-// draw();
+draw();
 
 // //// esempio con e senza evenodd:
 // // const canvas = document.getElementById("my-canvas");
@@ -219,42 +210,42 @@
 // // ctx.fill();
 // // ctx.stroke();
 
-const canvas = document.getElementById("my-canvas");
-const ctx = canvas.getContext("2d");
-const rectangles = [];
+// const canvas = document.getElementById("my-canvas");
+// const ctx = canvas.getContext("2d");
+// const rectangles = [];
 
-// Inizializza i quadratini viola
-for (let i = 0; i < 100; i++) {
-    rectangles.push({
-        x: Math.random() * canvas.width, // Posizione X casuale
-        y: Math.random() * canvas.height, // Posizione Y casuale
-        size: 10, // Dimensione fissa dei quadratini
-        speedX: (Math.random() - 0.5) * 1, // Velocità casuale lungo X
-        speedY: (Math.random() - 0.5) * 1 // Velocità casuale lungo Y
-    });
-}
+// // Inizializza i quadratini viola
+// for (let i = 0; i < 100; i++) {
+//     rectangles.push({
+//         x: Math.random() * canvas.width, // Posizione X casuale
+//         y: Math.random() * canvas.height, // Posizione Y casuale
+//         size: 10, // Dimensione fissa dei quadratini
+//         speedX: (Math.random() - 0.5) * 1, // Velocità casuale lungo X
+//         speedY: (Math.random() - 0.5) * 1 // Velocità casuale lungo Y
+//     });
+// }
 
-function drawRectangles() {
-    // Pulisci la canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+// function drawRectangles() {
+//     // Pulisci la canvas
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    rectangles.forEach(rect => {
-        // per ogni quadratino, muovilo su asse x e y
-        rect.x += rect.speedX;
-        rect.y += rect.speedY;
+//     rectangles.forEach(rect => {
+//         // per ogni quadratino, muovilo su asse x e y
+//         rect.x += rect.speedX;
+//         rect.y += rect.speedY;
 
-        // Fai rimbalzare i quadratini sui bordi della canvas
-        if (rect.x < 0 || rect.x > canvas.width) rect.speedX *= -1;
-        if (rect.y < 0 || rect.y > canvas.height) rect.speedY *= -1;
+//         // Fai rimbalzare i quadratini sui bordi della canvas
+//         if (rect.x < 0 || rect.x > canvas.width) rect.speedX *= -1;
+//         if (rect.y < 0 || rect.y > canvas.height) rect.speedY *= -1;
 
-        // Disegna il quadratino viola
-        ctx.fillStyle = "pink";
-        ctx.fillRect(rect.x, rect.y, rect.size, rect.size);
-    });
+//         // Disegna il quadratino viola
+//         ctx.fillStyle = "pink";
+//         ctx.fillRect(rect.x, rect.y, rect.size, rect.size);
+//     });
 
-    // Richiama la funzione per creare un'animazione continua
-    requestAnimationFrame(drawRectangles);
-}
+//     // Richiama la funzione per creare un'animazione continua
+//     requestAnimationFrame(drawRectangles);
+// }
 
-// Avvia l'animazione
-drawRectangles();
+// // Avvia l'animazione
+// drawRectangles();
