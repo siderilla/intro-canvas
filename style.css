@@ -7,7 +7,7 @@ body{
 }
 
 .canvas{
-    /* background-color: white; */
-	background-color: blue;
-	background-image: linear-gradient(blue, azure);
+    background-color: white;
+	/* background-color: blue;
+	background-image: linear-gradient(blue, azure); */
 }

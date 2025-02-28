@@ -76,6 +76,108 @@
 //////////////// 2 ////////////////
 // far nevicare la canva (magari si usa l'emoji?)
 
+// let entities = [];
+// let canvas;
+// let ctx;
+
+// function setUp() {
+//     canvas = document.getElementById('my-canvas');
+//     ctx = canvas.getContext('2d');
+
+//     for (let i = 0; i < 200; i++) {
+//         const rect = {};
+
+//         //dimensioni rect - dell'emoji non la cambia
+//         // rect.width = 15;
+//         // rect.height = 15;
+
+//         //partenza rect
+//         rect.originX = Math.random() * 600;
+//         rect.originY = Math.random() * -600;
+
+// 		//emoji al posto del rect.color
+//         rect.emoji = "❄️";
+		
+// 		//colori rect iniziale
+//         // rect.color = 'white'
+
+//         //velocità rect inziale
+//         rect.speedX = 0;
+//         rect.speedY = 1;
+        
+//         entities.push(rect);
+//     }
+// }
+
+// function update() {
+//     for (let i = 0; i < entities.length; i++) {
+//         const rect = entities[i];
+
+//         rect.originY += rect.speedY;
+//         rect.originX += rect.speedX;
+
+// 		//genera all'infinito
+// 		if (rect.originY > 600) {
+//             rect.originY = Math.random() * -50;
+//             rect.originX = Math.random() * 600;
+//             rect.speedX = 0
+//             rect.speedY = 1
+//         }
+// 		// rect.speedX += (Math.random() - 0.5) * 0.02;
+
+//         //CAMBIA VELOCITA
+
+//         const rollX = Math.random();
+
+//         //probabilità di cambiare velocità
+//         if(rollX < 0.5) {
+//             //la curva e velocità
+//             const speedDelta = -0.01; // ho diminuito il valore del delta
+//             rect.speedX += speedDelta;
+//         } else {
+//             const speedDelta = 0.01;
+//             rect.speedX += speedDelta;
+//         }
+//     }
+// }
+
+// function draw() {
+//     ctx.clearRect(0, 0, 600, 600);
+
+// 	//SCELTA FONT PER INSERIMENTO EMOJI 
+// 	ctx.font = "12px Arial"; // assegnazione grandezza emoji + font a caso per avere accesso
+
+//     for (let i = 0; i < entities.length; i++) {
+//         const rect = entities[i];
+// 		ctx.fillStyle = 'white';
+//         ctx.fillText(rect.emoji, rect.originX, rect.originY);
+//         // ctx.fillStyle = rect.color;
+//         // ctx.fillRect(rect.originX, rect.originY, rect.width, rect.height);
+//     }
+// }
+
+// function gameLoop(elapsedTime) {
+
+//     update();
+
+//     draw();
+
+//     requestAnimationFrame(gameLoop);
+// }
+
+// function start() {
+//     setUp();
+
+//     requestAnimationFrame(gameLoop);
+// }
+
+// start();
+
+//////////////// 3 ////////////////
+// rettangoli (height sempre uguale, width variabile) in linea su altezze diverse della canva
+// che si muovono verso dx a velocità diverse
+// per ogni riga un array di rettangoli
+
 let entities = [];
 let canvas;
 let ctx;
@@ -84,28 +186,46 @@ function setUp() {
     canvas = document.getElementById('my-canvas');
     ctx = canvas.getContext('2d');
 
-    for (let i = 0; i < 200; i++) {
-        const rect = {};
+    // Imposta le dimensioni del canvas in base alla finestra
+    canvas.width = 600;
+    canvas.height = 600;
 
-        //dimensioni rect - dell'emoji non la cambia
-        // rect.width = 15;
-        // rect.height = 15;
+    createRows();
+}
 
-        //partenza rect
-        rect.originX = Math.random() * 600;
-        rect.originY = Math.random() * -600;
+function createRows() {
+    entities = []; // Resetta le entità
 
-		//emoji al posto del rect.color
-        rect.emoji = "❄️";
-		
-		//colori rect iniziale
-        // rect.color = 'white'
+    const rowHeight = 30; // Altezza di ciascuna riga
+    const rectSpacing = 20; // Spaziatura tra i rettangoli
+    const numRows = Math.floor(canvas.height / rowHeight); // Numero di righe basato sull'altezza del canvas
 
-        //velocità rect inziale
-        rect.speedX = 0;
-        rect.speedY = 1;
-        
-        entities.push(rect);
+    for (let row = 0; row < numRows; row++) {
+        let currentX = 0;
+
+        // Assegna una velocità casuale a ciascuna riga
+        const rowSpeed = Math.random() * 2 + 0.5; // Velocità tra 0.5 e 2.5
+
+        while (currentX < canvas.width) {
+            const rect = {};
+
+            // Dimensioni rettangolo (casuali)
+            rect.width = Math.random() * 30 + 1; // Larghezza tra 1 e 31px
+            rect.height = rowHeight - 5; // Altezza fissa
+
+            // Posizione iniziale
+            rect.originX = currentX;
+            rect.originY = row * rowHeight;
+
+            // Colore
+            rect.color = 'black';
+
+            // Velocità (uguale per tutti i rettangoli della stessa riga)
+            rect.speed = rowSpeed;
+
+            entities.push(rect);
+            currentX += rect.width + rectSpacing; // Aggiungi spaziatura
+        }
     }
 }
 
@@ -113,70 +233,38 @@ function update() {
     for (let i = 0; i < entities.length; i++) {
         const rect = entities[i];
 
-        rect.originY += rect.speedY;
-        rect.originX += rect.speedX;
+        // Muovi il rettangolo verso destra con la sua velocità
+        rect.originX += rect.speed;
 
-		//genera all'infinito
-		if (rect.originY > 600) {
-            rect.originY = Math.random() * -50;
-            rect.originX = Math.random() * 600;
-            rect.speedX = 0
-            rect.speedY = 1
-        }
-		// rect.speedX += (Math.random() - 0.5) * 0.02;
-
-        //CAMBIA VELOCITA
-
-        const rollX = Math.random();
-
-        //probabilità di cambiare velocità
-        if(rollX < 0.5) {
-            //la curva e velocità
-            const speedDelta = -0.01; // ho diminuito il valore del delta
-            rect.speedX += speedDelta;
-        } else {
-            const speedDelta = 0.01;
-            rect.speedX += speedDelta;
+        // Resetta la posizione quando esce dal canvas
+        if (rect.originX > canvas.width) {
+            rect.originX = -rect.width; // Riappare a sinistra
         }
     }
 }
 
 function draw() {
-    ctx.clearRect(0, 0, 600, 600);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-	//SCELTA FONT PER INSERIMENTO EMOJI 
-	ctx.font = "12px Arial"; // assegnazione grandezza emoji + font a caso per avere accesso
-
-    for (let i = 0; i < entities.length; i++) {
+    for (let i = 0; i < 340; i++) {
         const rect = entities[i];
-		ctx.fillStyle = 'white';
-        ctx.fillText(rect.emoji, rect.originX, rect.originY);
-        // ctx.fillStyle = rect.color;
-        // ctx.fillRect(rect.originX, rect.originY, rect.width, rect.height);
+        ctx.fillStyle = rect.color;
+        ctx.fillRect(rect.originX, rect.originY, rect.width, rect.height);
     }
 }
 
 function gameLoop(elapsedTime) {
-
     update();
-
     draw();
-
     requestAnimationFrame(gameLoop);
 }
 
 function start() {
     setUp();
-
     requestAnimationFrame(gameLoop);
 }
 
 start();
-
-//////////////// 3 ////////////////
-// rettangoli (height sempre uguale, width variabile) in linea su altezze diverse della canva
-// che si muovono verso dx a velocità diverse
-// per ogni riga un array di rettangoli
 
 //////////////// 4 ////////////////
 // leggere capitolo sort eloquentjs

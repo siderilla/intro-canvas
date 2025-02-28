@@ -27,7 +27,7 @@ function setUp() {
 
 }
 
-function update() {7
+function update() {
     for (let i = 0; i < entities.length; i++) {
         const rect = entities[i];
         rect.originX += rect.speedX;
