@@ -62,127 +62,127 @@
 
 // // TEST da sballo
 
-// // const canvas = document.getElementById('my-canvas');
-// // const ctx = canvas.getContext('2d');
-// // canvas.width = 600;
-// // canvas.height = 600;
+const canvas = document.getElementById('my-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = 600;
+canvas.height = 600;
 
-// // const rectangles = [];
+const rectangles = [];
 
-// // // Inizializza i quadratini
-// // for (let i = 0; i < 300; i++) {
-// //     rectangles.push({
-// //         x: Math.random() * canvas.width,
-// //         y: Math.random() * canvas.height,
-// //         size: 10, // Dimensione fissa per i quadratini
-// //         color: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, ${Math.random()})`,
-// //         speed: Math.random() * 2 + 1, // Velocità casuale
-// //         angle: Math.random() * Math.PI * 2, // Direzione casuale iniziale
-// //         randomness: Math.random() * 0.5 + 0.5 // Fattore di casualità
-// //     });
-// // }
-
-// // let mouseX = -100;
-// // let mouseY = -100;
-
-// // // Listener per il movimento del mouse
-// // canvas.addEventListener('mousemove', (event) => {
-// //     const rect = canvas.getBoundingClientRect();
-// //     mouseX = event.clientX - rect.left;
-// //     mouseY = event.clientY - rect.top;
-// // });
-
-// // function drawRectangles() {
-// //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-// //     rectangles.forEach(rect => {
-// //         // Calcola la distanza dal cursore
-// //         const dx = rect.x - mouseX;
-// //         const dy = rect.y - mouseY;
-// //         const distance = Math.sqrt(dx * dx + dy * dy);
-
-// //         // Se il quadratino è vicino al cursore, spostalo
-// //         if (distance < 100) {
-// //             const force = 100 / distance; // Forza inversamente proporzionale alla distanza
-// //             const angleToMouse = Math.atan2(dy, dx);
-
-// //             // Aggiungi una componente casuale all'angolo di fuga
-// //             rect.angle = angleToMouse + (Math.random() - 1.5) * rect.randomness;
-
-// //             // Sposta il quadratino
-// //             rect.x += Math.cos(rect.angle) * rect.speed * force;
-// //             rect.y += Math.sin(rect.angle) * rect.speed * force;
-// //         } else {
-// //             // Movimento casuale quando non è vicino al cursore
-// //             rect.x += Math.cos(rect.angle) * rect.speed * 0.1;
-// //             rect.y += Math.sin(rect.angle) * rect.speed * 0.1;
-
-// //             // Cambia leggermente la direzione per un effetto più naturale
-// //             rect.angle += (Math.random() - 0.5) * 0.1;
-// //         }
-
-// //         // Mantieni i quadratini all'interno della canvas
-// //         if (rect.x < 0) rect.x = canvas.width;
-// //         if (rect.x > canvas.width) rect.x = 0;
-// //         if (rect.y < 0) rect.y = canvas.height;
-// //         if (rect.y > canvas.height) rect.y = 0;
-
-// //         // Disegna il quadratino
-// //         ctx.fillStyle = rect.color;
-// //         ctx.fillRect(rect.x, rect.y, rect.size, rect.size);
-// //     });
-// // }
-
-// // setInterval(drawRectangles, 30);
-
-function draw() {
-	const ctx = document.getElementById("my-canvas").getContext("2d");
-
-// ctx.strokeStyle = 'crimson';
-// ctx.lineWidth = 1;
-// ctx.strokeRect(350, 400, 10, 50);
-for (let i = 0; i < 10; i++) {
-
-	//diagonale da sx a dx
-	ctx.lineWidth = 1 + i;
-	ctx.beginPath();
-	ctx.strokeStyle = "blue";
-	ctx.moveTo(580 + i * 20, 580);
-	ctx.lineTo(20 + i * 20, 20);
-	ctx.stroke();
-
-	// //diagonale da dx a sx
-	ctx.beginPath();
-	ctx.strokeStyle = "violet";
-	ctx.moveTo(20, 580);
-	ctx.lineTo(580 + i * 100, 20);
-	// ctx.lineTo(20, 20) // aggiungendo una terza istruzione
-	// ctx.closePath(); // insieme a closepath formo un triangolo BOOOH WOW
-	ctx.stroke();
+// Inizializza i quadratini
+for (let i = 0; i < 300; i++) {
+    rectangles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: 10, // Dimensione fissa per i quadratini
+        color: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, ${Math.random()})`,
+        speed: Math.random() * 2 + 1, // Velocità casuale
+        angle: Math.random() * Math.PI * 2, // Direzione casuale iniziale
+        randomness: Math.random() * 0.5 + 0.5 // Fattore di casualità
+    });
 }
-// // for (let i = 0; i < 10; i++) {
+
+let mouseX = -100;
+let mouseY = -100;
+
+// Listener per il movimento del mouse
+canvas.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = event.clientX - rect.left;
+    mouseY = event.clientY - rect.top;
+});
+
+function drawRectangles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    rectangles.forEach(rect => {
+        // Calcola la distanza dal cursore
+        const dx = rect.x - mouseX;
+        const dy = rect.y - mouseY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        // Se il quadratino è vicino al cursore, spostalo
+        if (distance < 100) {
+            const force = 100 / distance; // Forza inversamente proporzionale alla distanza
+            const angleToMouse = Math.atan2(dy, dx);
+
+            // Aggiungi una componente casuale all'angolo di fuga
+            rect.angle = angleToMouse + (Math.random() - 1.5) * rect.randomness;
+
+            // Sposta il quadratino
+            rect.x += Math.cos(rect.angle) * rect.speed * force;
+            rect.y += Math.sin(rect.angle) * rect.speed * force;
+        } else {
+            // Movimento casuale quando non è vicino al cursore
+            rect.x += Math.cos(rect.angle) * rect.speed * 0.1;
+            rect.y += Math.sin(rect.angle) * rect.speed * 0.1;
+
+            // Cambia leggermente la direzione per un effetto più naturale
+            rect.angle += (Math.random() - 0.5) * 0.1;
+        }
+
+        // Mantieni i quadratini all'interno della canvas
+        if (rect.x < 0) rect.x = canvas.width;
+        if (rect.x > canvas.width) rect.x = 0;
+        if (rect.y < 0) rect.y = canvas.height;
+        if (rect.y > canvas.height) rect.y = 0;
+
+        // Disegna il quadratino
+        ctx.fillStyle = rect.color;
+        ctx.fillRect(rect.x, rect.y, rect.size, rect.size);
+    });
+}
+
+setInterval(drawRectangles, 30);
+
+// function draw() {
+// 	const ctx = document.getElementById("my-canvas").getContext("2d");
+
+// // ctx.strokeStyle = 'crimson';
+// // ctx.lineWidth = 1;
+// // ctx.strokeRect(350, 400, 10, 50);
+// for (let i = 0; i < 10; i++) {
+
+// 	//diagonale da sx a dx
+// 	ctx.lineWidth = 1 + i;
+// 	ctx.beginPath();
+// 	ctx.strokeStyle = "blue";
+// 	ctx.moveTo(580 + i * 20, 580);
+// 	ctx.lineTo(20 + i * 20, 20);
+// 	ctx.stroke();
+
+// 	// //diagonale da dx a sx
+// 	ctx.beginPath();
+// 	ctx.strokeStyle = "violet";
+// 	ctx.moveTo(20, 580);
+// 	ctx.lineTo(580 + i * 100, 20);
+// 	// ctx.lineTo(20, 20) // aggiungendo una terza istruzione
+// 	// ctx.closePath(); // insieme a closepath formo un triangolo BOOOH WOW
+// 	ctx.stroke();
+// }
+// // // for (let i = 0; i < 10; i++) {
 	
-// // ctx.lineWidth = 1 + i;
-// // ctx.beginPath(); // fa effetto anti-alias non so perché all'arco
-// // ctx.arc(300, 300, 50, 0, Math.PI * 2, true);
-// // ctx.arc(300, 300, 30, 0, Math.PI * 2, true);
-// // ctx.fill("evenodd");
+// // // ctx.lineWidth = 1 + i;
+// // // ctx.beginPath(); // fa effetto anti-alias non so perché all'arco
+// // // ctx.arc(300, 300, 50, 0, Math.PI * 2, true);
+// // // ctx.arc(300, 300, 30, 0, Math.PI * 2, true);
+// // // ctx.fill("evenodd");
 
-// // // La regola Even-Odd determina se un punto deve essere riempito o meno in 
-// // // base al numero di volte che un raggio tracciato da quel punto all'infinito
-// // // interseca il percorso. Ecco come funziona:
-// // // Traccia un raggio da un punto all'infinito (in qualsiasi direzione).
-// // // Conta il numero di volte che il raggio interseca il percorso.
-// // // Se il numero di intersezioni è dispari, il punto viene riempito.
-// // // Se il numero di intersezioni è pari, il punto non viene riempito.
+// // // // La regola Even-Odd determina se un punto deve essere riempito o meno in 
+// // // // base al numero di volte che un raggio tracciato da quel punto all'infinito
+// // // // interseca il percorso. Ecco come funziona:
+// // // // Traccia un raggio da un punto all'infinito (in qualsiasi direzione).
+// // // // Conta il numero di volte che il raggio interseca il percorso.
+// // // // Se il numero di intersezioni è dispari, il punto viene riempito.
+// // // // Se il numero di intersezioni è pari, il punto non viene riempito.
 
-// // ctx.stroke();
+// // // ctx.stroke();
 
-// // }
+// // // }
 
-}
+// }
 
-draw();
+// draw();
 
 // //// esempio con e senza evenodd:
 // // const canvas = document.getElementById("my-canvas");
