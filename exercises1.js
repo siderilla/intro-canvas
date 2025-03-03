@@ -178,15 +178,15 @@
 // che si muovono verso dx a velocità diverse
 // per ogni riga un array di rettangoli
 
-let entities = [];
-let canvas;
-let ctx;
+let entities = []; // crea un arrau che contiene gli oggetti disegnati sul canvas
+let canvas; // riferimento al canvas
+let ctx; // riferimento al contesto del canvas
 
 function setUp() {
-    canvas = document.getElementById('my-canvas');
-    ctx = canvas.getContext('2d');
+    canvas = document.getElementById('my-canvas'); // selezionato l'id dall'html
+    ctx = canvas.getContext('2d'); // contesto del rendering 2d assegnato 
 
-    // Imposta le dimensioni del canvas in base alla finestra
+    // imposta le dimensioni del canvas in base alla finestra
     canvas.width = 600;
     canvas.height = 600;
 
@@ -194,24 +194,24 @@ function setUp() {
 }
 
 function createRows() {
-    entities = []; // Resetta le entità
+    entities = []; // resetta le entità
 
-    const rowHeight = 30; // Altezza di ciascuna riga
-    const rectSpacing = 20; // Spaziatura tra i rettangoli
-    const numRows = Math.floor(canvas.height / rowHeight); // Numero di righe basato sull'altezza del canvas
+    const rowHeight = 12; // altezza di ciascuna riga
+    const rectSpacing = 5; // spaziatura tra i rettangoli
+    const numRows = Math.floor(canvas.height / rowHeight); // numero di righe basato sull'altezza del canvas
 
     for (let row = 0; row < numRows; row++) {
         let currentX = 0;
 
-        // Assegna una velocità casuale a ciascuna riga
-        const rowSpeed = Math.random() * 2 + 0.5; // Velocità tra 0.5 e 2.5
+        // assegna una velocità casuale a ciascuna riga
+        const rowSpeed = Math.random() * 3 + 0.5; // Velocità tra 0.5 e 2.5
 
         while (currentX < canvas.width) {
             const rect = {};
 
             // Dimensioni rettangolo (casuali)
-            rect.width = Math.random() * 30 + 1; // Larghezza tra 1 e 31px
-            rect.height = rowHeight - 5; // Altezza fissa
+            rect.width = Math.random() * 25;
+            rect.height = rowHeight - 2; // Altezza fissa
 
             // Posizione iniziale
             rect.originX = currentX;
@@ -246,7 +246,7 @@ function update() {
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    for (let i = 0; i < 340; i++) {
+    for (let i = 0; i < entities.length; i++) {
         const rect = entities[i];
         ctx.fillStyle = rect.color;
         ctx.fillRect(rect.originX, rect.originY, rect.width, rect.height);
@@ -261,12 +261,12 @@ function gameLoop(elapsedTime) {
 
 function start() {
     setUp();
-    requestAnimationFrame(gameLoop);
+    requestAnimationFrame(gameLoop); // funzione della libreria del browser che gestisce l'animazione
 }
 
 start();
 
-//////////////// 4 ////////////////
+//////////////// 4 ///////	/////////
 // leggere capitolo sort eloquentjs
 // algoritmo di sorting - bubblesort
 // https://www.geeksforgeeks.org/bubble-sort-algorithm/

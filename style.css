@@ -1,4 +1,4 @@
-body{
+/* body{
     background: #313131;
     display: flex;
     justify-content: center;
@@ -9,5 +9,25 @@ body{
 .canvas{
     background-color: white;
 	/* background-color: blue;
-	background-image: linear-gradient(blue, azure); */
+	background-image: linear-gradient(blue, azure);
+} */
+
+
+
+
+/* prova black hole */
+
+body, html {
+	margin: 0;
+	background: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* altezza 100% segue la grandezza del browser */
+	height: 100%;
+}
+
+canvas {
+	/* display: block -> il figlio di body si comporterà come un blocco di contenuto occupando tutta la larghezza disponibile (no margini) */
+	display: block;
 }
